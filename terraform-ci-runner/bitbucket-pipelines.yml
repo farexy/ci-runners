@@ -1,0 +1,14 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+pipelines:
+  default:
+    - step:
+        name: Buld and Push image
+        script:
+            - docker login $CONTAINER_REGISTRY -u $SERVICE_USER -p $SERVICE_USER_PWD
+            - docker build -t $CONTAINER_REGISTRY/terraformcirunner .
+            - docker push $CONTAINER_REGISTRY/terraformcirunner
+        services:
+          - docker
